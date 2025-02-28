@@ -35,10 +35,16 @@ export default class SuperSimpleSPA {
 				responseContent.then( content => {
 					const parser = new DOMParser();
 					const newDocument = parser.parseFromString( content, 'text/html' );
-					const newBody = newDocument.querySelector( 'body' );
-					this.body.innerHTML = newBody.innerHTML;
+					const elementToUpdate = 'body';
+					const newBody = newDocument.querySelector( elementToUpdate );
+					this.updateElement( elementToUpdate, newBody.innerHTML );
 				});
 			}
 		});
+	}
+
+	updateElement( selector, newHtml ) {
+		const element = document.querySelector( selector );
+		element.innerHTML = newHtml;
 	}
 }
