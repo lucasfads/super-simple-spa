@@ -1,6 +1,6 @@
 export default class SuperSimpleSPA {
-	constructor( config = {} ) {
-		this.config = config;
+	constructor( { elementsToUpdate = [ 'body' ] } = {} ) {
+		this.config = { elementsToUpdate };
 	}
 
 	init() {
@@ -35,16 +35,22 @@ export default class SuperSimpleSPA {
 				responseContent.then( content => {
 					const parser = new DOMParser();
 					const newDocument = parser.parseFromString( content, 'text/html' );
-					const elementToUpdate = 'body';
-					const newBody = newDocument.querySelector( elementToUpdate );
-					this.updateElement( elementToUpdate, newBody.innerHTML );
+					this.loopElementsToUpdate( newDocument );
 				});
 			}
 		});
 	}
 
-	updateElement( selector, newHtml ) {
+	updateElement( selector, newDocument ) {
 		const element = document.querySelector( selector );
-		element.innerHTML = newHtml;
+		const newElement = newDocument.querySelector( selector );
+		element.innerHTML = newElement.innerHTML;
+	}
+
+	loopElementsToUpdate( newDocument ) {
+		this.config.elementsToUpdate.forEach( elementToUpdate => {
+			console.log( 'Updating element:', elementToUpdate );
+			this.updateElement( elementToUpdate, newDocument );
+		});
 	}
 }
