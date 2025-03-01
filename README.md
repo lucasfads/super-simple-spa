@@ -17,7 +17,7 @@ You can define which elements in your HTML should be updated indicating their se
 ```js
 const spa = new SuperSimpleSPA(
 	{
-		"elementsToUpdate": ["main", "#sidebar"], // defaults to ["body"] only
+		"elementsToUpdate": ["title", "main", "#sidebar"], // defaults to ["title","body"]
 	}
 );
 ```
