@@ -8,6 +8,9 @@ export default class SuperSimpleSPA {
 		this.body.addEventListener( 'click', ( event ) => {
 			this.interceptLinks( event );
 		});
+		this.body.addEventListener( 'submit', ( event ) => {
+			this.interceptForms( event );
+		});
 
 		console.log( 'SuperSimpleSPA initialized' );
 	}
@@ -21,13 +24,36 @@ export default class SuperSimpleSPA {
 		}
 	}
 
+	interceptForms(event) {
+		const form = event.target.closest( 'form' );
+		if ( form ) {
+			const path = form.action;
+			const pathUrl = new URL( path );
+			if (pathUrl.hostname === window.location.hostname) {
+				event.preventDefault();
+				const method = form.method;
+				const data = new FormData( form );
+				console.log( 'Form data:', data );
+				// console log all form data
+				for (let pair of data.entries()) {
+					console.log(pair[0]+ ', '+ pair[1]); 
+				}
+				this.handleReload( path, method, data );
+			}
+		}
+	}
+
 	handleReload(path, method = 'GET', data = null) {
 		const url = new URL( path, window.location.origin );
 		history.pushState( null, null, url );
-		const response = fetch( url, {
+		const requestInit = {
 			method: method,
-			body: data,
-		});
+		};
+		if (!['GET', 'HEAD'].includes(method.toUpperCase()))
+			requestInit.body = data;
+		console.log ('Method:', method);
+		console.log ('Request Init:', requestInit);
+		const response = fetch( url, requestInit );
 		
 		response.then( response => {
 			if ( response.ok ) {
