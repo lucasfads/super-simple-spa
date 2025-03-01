@@ -1,0 +1,81 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap');
+
+:root {
+	--primary-color: #11222c;
+	--secondary-color: #e1e4e6;
+	--accent-color: #6ebe28;
+
+	--font-family: 'Roboto Condensed', sans-serif;
+}
+
+body {
+	margin: unset;
+	background-color: var(--primary-color);
+	color: var(--secondary-color);
+	font-family: var(--font-family);
+	font-size: 18px;
+}
+
+section, header, footer {
+	padding: 20px 80px;
+}
+
+section:has(aside) {
+	display: grid;
+	grid-template-columns: 1fr 3fr;
+	gap: 40px;
+}
+
+aside {
+	background-color: var(--secondary-color);
+	border-radius: 10px;
+	padding: 20px;
+}
+
+a {
+	display: inline-block;
+	color: var(--accent-color);
+	text-decoration: none;
+	transition: transform 0.3s;
+}
+
+a:hover {
+	transform: scale(1.2);
+}
+
+ul {
+	list-style-type: none;
+	padding: 0;
+}
+
+li {
+	margin-bottom: 10px;
+}
+
+h1, h2, h3 {
+	margin: 0;
+}
+
+form {
+	display: grid;
+	grid-template-columns: 1fr 2fr;
+	gap: 20px;
+}
+
+input, textarea {
+	border: none;
+	border-radius: 5px;
+	padding: 10px;
+}
+
+[type="submit"] {
+	background-color: var(--accent-color);
+	color: var(--secondary-color);
+	cursor: pointer;
+	border-radius: 8px;
+	border: none;
+	padding: 10px 20px;
+	grid-column: span 2;
+	font-weight: 600;
+	font-size: 1.2rem;
+}
