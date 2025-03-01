@@ -33,11 +33,6 @@ export default class SuperSimpleSPA {
 				event.preventDefault();
 				const method = form.method;
 				const data = new FormData( form );
-				console.log( 'Form data:', data );
-				// console log all form data
-				for (let pair of data.entries()) {
-					console.log(pair[0]+ ', '+ pair[1]); 
-				}
 				this.handleReload( path, method, data );
 			}
 		}
@@ -51,8 +46,6 @@ export default class SuperSimpleSPA {
 		};
 		if (!['GET', 'HEAD'].includes(method.toUpperCase()))
 			requestInit.body = data;
-		console.log ('Method:', method);
-		console.log ('Request Init:', requestInit);
 		const response = fetch( url, requestInit );
 		
 		response.then( response => {
@@ -75,7 +68,6 @@ export default class SuperSimpleSPA {
 
 	loopElementsToUpdate( newDocument ) {
 		this.config.elementsToUpdate.forEach( elementToUpdate => {
-			console.log( 'Updating element:', elementToUpdate );
 			this.updateElement( elementToUpdate, newDocument );
 		});
 	}
