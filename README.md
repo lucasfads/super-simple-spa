@@ -21,3 +21,11 @@ const spa = new SuperSimpleSPA(
 	}
 );
 ```
+
+#### Custom event
+A custom event, `spaPageLoaded`, is dispached whenever a page is loaded via this plugin (either via a link or a form). You can listen to this event to do whatever you want
+```js
+document.addEventListener( 'spaPageLoaded', () => {
+	console.log( 'spaPageLoaded event fired' );
+});
+```
