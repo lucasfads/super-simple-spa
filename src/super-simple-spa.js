@@ -1,6 +1,7 @@
 export default class SuperSimpleSPA {
 	constructor( { elementsToUpdate = [ 'body' ] } = {} ) {
 		this.config = { elementsToUpdate };
+		this.spaPageLoadedEvent = new Event( 'spaPageLoaded' );
 	}
 
 	init() {
@@ -21,6 +22,7 @@ export default class SuperSimpleSPA {
 			event.preventDefault();
 			const path = link.pathname;
 			this.handleReload( path );
+			document.dispatchEvent(this.spaPageLoadedEvent);
 		}
 	}
 
@@ -34,6 +36,7 @@ export default class SuperSimpleSPA {
 				const method = form.method;
 				const data = new FormData( form );
 				this.handleReload( path, method, data );
+				document.dispatchEvent(this.spaPageLoadedEvent);
 			}
 		}
 	}

@@ -6,3 +6,7 @@ const spa = new SuperSimpleSPA(
 	}
 );
 spa.init();
+
+document.addEventListener( 'spaPageLoaded', () => {
+	console.log( 'spaPageLoaded event fired' );
+});
