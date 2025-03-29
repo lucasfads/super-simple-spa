@@ -66,6 +66,7 @@ export default class SuperSimpleSPA {
 					this.loopElementsToUpdate( newDocument );
 				});
 			}
+		window.scrollTo(0, 0);
 		}).catch( error => {
 			console.error( 'Error fetching the page:', error );
 		});
