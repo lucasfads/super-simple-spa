@@ -30,6 +30,9 @@ aside {
 	background-color: var(--secondary-color);
 	border-radius: 10px;
 	padding: 20px;
+	position: sticky;
+	top: 40px;
+	height: fit-content;
 }
 
 a {
