@@ -12,6 +12,11 @@ export default class SuperSimpleSPA {
 		this.body.addEventListener( 'submit', ( event ) => {
 			this.interceptForms( event );
 		});
+		window.addEventListener( 'popstate', ( event ) => {
+			const path = window.location.pathname;
+			this.handleReload( path, 'GET', null, false );
+			document.dispatchEvent(this.spaPageLoadedEvent);
+		});
 
 		console.log( 'SuperSimpleSPA initialized' );
 	}
@@ -41,9 +46,10 @@ export default class SuperSimpleSPA {
 		}
 	}
 
-	handleReload(path, method = 'GET', data = null) {
+	handleReload(path, method = 'GET', data = null, pushState = true) {
 		const url = new URL( path, window.location.origin );
-		history.pushState( null, null, url );
+		if ( pushState )
+			window.history.pushState( null, null, url );
 		const requestInit = {
 			method: method,
 		};
